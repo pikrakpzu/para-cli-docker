@@ -58,7 +58,7 @@ jobs:
       - name: Test npm
         run: docker run --rm pikrakowski/para-cli:test sh -c "npm version"
       - name: Test para-cli
-        run: docker run --rm pikrakowski/para-cli:test sh -c "para-cli me"
+        run: docker run --rm pikrakowski/para-cli:test sh -c "para-cli --accessKey='app:test' --secretKey='secret' --endpoint='http://localhost:8912' me"
   cleanup-artifacts:
     name: Cleanup artifacts
     runs-on: ubuntu-latest
