@@ -25,16 +25,16 @@ jobs:
         id: docker-metadata
         uses: docker/metadata-action@v4
         with:
-          images: pikrakpzu/para-cli
+          images: pikrakowski/para-cli
       - name: Build docker image
         uses: docker/build-push-action@v3
         with:
           context: .
           outputs: type=docker
-          tags: pikrakpzu/para-cli:test
+          tags: pikrakowski/para-cli:test
           labels: ${{ steps.docker-metadata.outputs.labels }}
       - name: Save docker image
-        run: docker save -o docker-image.tar pikrakpzu/para-cli:test
+        run: docker save -o docker-image.tar pikrakowski/para-cli:test
       - name: Upload docker-image.tar
         uses: actions/upload-artifact@v3
         with:
@@ -54,11 +54,11 @@ jobs:
       - name: Load images
         run: docker load --input docker-image.tar
       - name: Test container up
-        run: docker run --rm pikrakpzu/para-cli:test hostname
+        run: docker run --rm pikrakowski/para-cli:test hostname
       - name: Test npm
-        run: docker run --rm pikrakpzu/para-cli:test sh -c "npm version"
+        run: docker run --rm pikrakowski/para-cli:test sh -c "npm version"
       - name: Test para-cli
-        run: docker run --rm pikrakpzu/para-cli:test sh -c "para-cli me"
+        run: docker run --rm pikrakowski/para-cli:test sh -c "para-cli me"
   cleanup-artifacts:
     name: Cleanup artifacts
     runs-on: ubuntu-latest
